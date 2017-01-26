@@ -1,0 +1,125 @@
+{
+  "outputDirectory": "../../src/example/service/",
+  "namespace": "example\\service",
+  "htaccessFile": "../../src/.htaccess",
+  "services": [
+    {
+      "name": "Gitara",
+      "disallow": false,
+      "methods": [
+        {
+          "type": "GET",
+          "parameters": [
+            {
+              "name": "id",
+              "type": "Integer"
+            }
+          ]
+        },
+        {
+          "type": "POST",
+          "parameters": [
+            {
+              "name": "nazwa",
+              "type": "String"
+            }
+          ],
+          "disallow": true
+        },
+        {
+          "type": "PUT",
+          "parameters": [],
+          "disallow": true
+        },
+        {
+          "type": "PATCH",
+          "parameters": [],
+          "disallow": true
+        },
+        {
+          "type": "DELETE",
+          "parameters": [],
+          "disallow": true
+        }
+      ]
+    },
+    {
+      "name": "Harmonijka",
+      "disallow": false,
+      "methods": [
+        {
+          "type": "GET",
+          "parameters": []
+        },
+        {
+          "type": "POST",
+          "parameters": []
+        },
+        {
+          "type": "PUT",
+          "parameters": []
+        },
+        {
+          "type": "PATCH",
+          "parameters": []
+        },
+        {
+          "type": "DELETE",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "name": "Festiwal",
+      "disallow": false,
+      "methods": [
+        {
+          "type": "GET",
+          "parameters": []
+        },
+        {
+          "type": "POST",
+          "parameters": []
+        },
+        {
+          "type": "PUT",
+          "parameters": []
+        },
+        {
+          "type": "PATCH",
+          "parameters": []
+        },
+        {
+          "type": "DELETE",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "name": "Ligalegend",
+      "disallow": false,
+      "methods": [
+        {
+          "type": "GET",
+          "parameters": []
+        },
+        {
+          "type": "POST",
+          "parameters": []
+        },
+        {
+          "type": "PUT",
+          "parameters": []
+        },
+        {
+          "type": "PATCH",
+          "parameters": []
+        },
+        {
+          "type": "DELETE",
+          "parameters": []
+        }
+      ]
+    }
+  ]
+}

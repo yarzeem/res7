@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="res7Creator">
+    <head>
+        <meta charset="utf-8">
+        <title>title</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <style>
+            .input-group {margin-bottom: 5px;}
+            .toolbar {margin-bottom: 5px;}
+            .submit-toolbar {margin-bottom: 5px;text-align: right;}
+            .GET {background-color: #eafcde;}
+            .POST {background-color: #def8fc;}
+            .PUT {background-color: #dedefc;}
+            .PATCH {background-color: #fcdefb;}
+            .DELETE {background-color: #fce9de;}
+        </style>
+        <script>
+            var app = angular.module('res7Creator', []);
+            app.controller('res7Ctrl', function($scope) {
+                $scope.config = {
+                    "outputDirectory" : null,
+                    "namespace" : null,
+                    "htaccessFile" : null,
+                    "services" : []
+                };
+                $scope.addService = function() {
+                    var service = {
+                        "name" : null,
+                        "disallow" : false,
+                        "methods" : []
+                    };
+                    var createMethod = function(methodType) {
+                        return {
+                            "type" : methodType,
+                            "parameters" : []
+                         };
+                    };
+                    service.methods.push(createMethod('GET'));
+                    service.methods.push(createMethod('POST'));
+                    service.methods.push(createMethod('PUT'));
+                    service.methods.push(createMethod('PATCH'));
+                    service.methods.push(createMethod('DELETE'));
+                    $scope.config.services.push(service);
+                };
+                $scope.addParameter = function(method) {
+                    method.parameters.push({"name" : null, "type" : null});
+                }
+            });
+        </script>
+    </head>
+    <body ng-controller="res7Ctrl">
+        <form>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-sm-12">
+                        <h1>res7 service creator</h1>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">Service classes output directory</span>
+                                    <input name"config.output-directory" class="form-control" ng-model="config.outputDirectory" type="text" required/>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">Service classes namespace</span>
+                                    <input name"config.namespace" class="form-control" ng-model="config.namespace" type="text" required/>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">.htaccess file path</span>
+                                    <input name"config.namespace" class="form-control" ng-model="config.htaccessFile" type="text" required/>
+                                </div>
+                                <div class="toolbar">
+                                    <button class="btn btn-primary" ng-click="addService()" type="button">Add service</button>
+                                </div>
+                                <div class="service-container" ng-repeat="service in config.services">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="basic-addon1">Service name</span>
+                                                <input name"service.name" class="form-control" ng-model="service.name" type="text" required />
+                                            </div>
+                                            <div class="methods-container" ng-repeat="method in service.methods">
+                                                <div class="panel panel-default {{method.type}}">
+                                                    <div class="panel-body">
+                                                        <h4>{{method.type}}</h4>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon">
+                                                            <input type="checkbox" aria-label="..." ng-model="method.disallow" value="true" name"method.disallow"/>
+                                                            </span>
+                                                            <input type="text" disabled="true" class="form-control" value="Disallow execution">
+                                                        </div>
+                                                        <div class="toolbar">
+                                                            <button class="btn btn-primary" ng-click="addParameter(method)" type="button">Add parameter</button>
+                                                        </div>
+                                                        <div class="parameters-container" ng-repeat="parameter in method.parameters">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon" id="basic-addon1">Parameter name</span>
+                                                                        <input name"parameter.name" class="form-control" ng-model="parameter.name" type="text" required/>
+                                                                    </div>
+                                                                    <div class="input-row">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">
+                                                                            <input type="radio" aria-label="..." ng-model="parameter.type" value="Integer" name"parameter.type" ng-required="!parameter.type"/>
+                                                                            </span>
+                                                                            <input type="text" disabled="true" class="form-control" value="Integer">
+                                                                        </div>
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">
+                                                                            <input type="radio" aria-label="..." ng-model="parameter.type" value="String" name"parameter.type" ng-required="!parameter.type"/>
+                                                                            </span>
+                                                                            <input type="text" disabled="true" class="form-control" value="String">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12">
+                        <div>
+                            <pre>{{config | json}}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
